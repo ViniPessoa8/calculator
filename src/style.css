@@ -3,6 +3,10 @@ body {
     
 }
 
+.outputScreen input {
+    pointer-events: none; 
+}
+
 .button {
     height: 80px;
     width: 80px;
