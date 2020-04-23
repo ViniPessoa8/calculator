@@ -1,10 +1,8 @@
 // Variables
 let output  = document.getElementById('txtOutput');
 let result  = document.getElementById('txtResult');
-let equals_triggered = false;
+let equals_triggered = true;
 let ops = ['+', '-', '*', '/'];
-
-// output.addEventListener('keyup', process_text);
 
 // Keyboard Listeners
 document.addEventListener('keyup', (e) => {
@@ -70,7 +68,7 @@ function process_text(txt) {
         str = str1[0];
         console.log('calculate(' + str + ')');
         result.value = calculate(str);
-    }  
+    } 
 } 
 
 function calculate(txt) {
@@ -124,4 +122,12 @@ function erase() {
     clear_text();
     output.value = new_str;
     process_text('');
+    fill_0();
+}
+
+function fill_0(){
+    if (output.value === ''){
+        output.value = '0';
+        equals_triggered = true;
+    }
 }
