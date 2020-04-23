@@ -1,9 +1,30 @@
+// Variables
 let output  = document.getElementById('txtOutput');
 let result  = document.getElementById('txtResult');
 let ops = ['+', '-', '*', '/'];
 
-output.addEventListener('keyup', process_text);
+// output.addEventListener('keyup', process_text);
 
+// Keyboard Listeners
+document.addEventListener('keyup', (e) => {
+    if (e.code == 'Numpad1') set_text('1');
+    if (e.code == 'Numpad2') set_text('2');
+    if (e.code == 'Numpad3') set_text('3');
+    if (e.code == 'Numpad4') set_text('4');
+    if (e.code == 'Numpad5') set_text('5');
+    if (e.code == 'Numpad6') set_text('6');
+    if (e.code == 'Numpad7') set_text('7');
+    if (e.code == 'Numpad8') set_text('8');
+    if (e.code == 'Numpad9') set_text('9');
+    if (e.code == 'Numpad0') set_text('0');
+    if (e.code == 'NumpadAdd') set_text('+');
+    if (e.code == 'NumpadSubtract') set_text('-');
+    if (e.code == 'NumpadMultiply') set_text('*');
+    if (e.code == 'NumpadDivide') set_text('/');
+    
+});
+
+// Functions
 function set_text(txt) {
     if (ops.indexOf(txt) >= 0){ // Operation
         let last_char = output.value.charAt(output.value.length-1);
