@@ -1,16 +1,23 @@
+let output  = document.getElementById('txtOutput');
+output.addEventListener('keyup', process_text);
+
 function set_text(txt) {
-    document.getElementById("txtOutput").value += txt;
+    output.value += txt;
+    process_text();
 }
 
 function clean_text() {
-    document.getElementById("txtOutput").value = '';
+    output.value = '';
 }
 
 function process_text() {  
-    txt     = document.getElementById("txtOutput").value;
-    pattern = /\d+[\+\-\*\/]\d+/m;
+    console.log("teste");
+    txt     = output.value;
+    pattern = /(\d+[\+\-\*\/]\d+)/;
     str     = txt.match(pattern);
     
-    clean_text();
-    alert(txt +"\n"+ str);
+    if (str != null) {
+        alert(txt +"\n"+ str[0]);
+    }
 } 
+
