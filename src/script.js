@@ -21,6 +21,7 @@ document.addEventListener('keyup', (e) => {
     if (e.code == 'NumpadSubtract') set_text('-');
     if (e.code == 'NumpadMultiply') set_text('*');
     if (e.code == 'NumpadDivide') set_text('/');
+    if (e.code == 'NumpadEnter') equals();
     
 });
 
@@ -33,7 +34,7 @@ function set_text(txt) {
             if (last_char !== txt){
                 output.value = output.value.replaceAt(output.value.length-1, txt);
             }
-        }  else {
+        } else {
             output.value += txt;
         }
     } else {
@@ -98,4 +99,12 @@ function calculate(txt) {
 
 String.prototype.replaceAt=function(index, replacement) {
     return this.substr(0, index) + replacement + this.substr(index + replacement.length);
+}
+
+function equals() {
+    if (result.value !== ''){
+        answer = result.value;
+        clean_text();
+        output.value = answer;
+    }
 }
