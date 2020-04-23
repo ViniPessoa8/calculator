@@ -41,18 +41,35 @@ body {
     padding: 0;
 }
 
-.output {
+.outputScreen {
     border: 3px  solid darkgray;
-    
+}
+
+.output {
+    height: 60px;
+    background-color: lightgray;
+    display: flex;
+    align-items: flex-end;
 }
 
 .txtOutput {
     margin: 0;
-    height: 80px;
+    height: 40px;
     width: 100%;
     background-color: lightgray;
     border: 0;
     font-size: 40px;
+    margin: 0;
+}
+
+.txtResult {
+    margin: 0;
+    height: 40px;
+    width: 100%;
+    background-color: lightgray;
+    color: grey;
+    border: 0;
+    font-size: 25px;
 }
 
 .numpad {
