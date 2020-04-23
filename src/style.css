@@ -39,7 +39,6 @@ body {
 }
 
 .output {
-    background-color: lightgray;
     border: 2px solid darkgray;
 }
 
@@ -55,4 +54,7 @@ body {
 .txtOutput {
     margin: 0;
     height:40px;
+    width: 100%;
+    background-color: lightgray;
+    border: 0;
 }

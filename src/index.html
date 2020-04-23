@@ -8,49 +8,47 @@
 <body>
     <div class='calculator'>
         <div class='output'>
-            <p class='txtOutput'></p>
+            <input type='text' class='txtOutput' id='txtOutput'>
         </div>
         <div class='keyboard'>
             <table class="numpad keyboard_style">
                 <tr>
-                    <td><button class="button">1</button></td>
-                    <td><button class="button">2</button></td>
-                    <td><button class="button">3</button></td>
+                    <td><button class="button" onclick="set_text('1')">1</button></td>
+                    <td><button class="button" onclick="set_text('2')">2</button></td>
+                    <td><button class="button" onclick="set_text('3')">3</button></td>
                 </tr>
                 <tr>
-                    <td><button class="button">4</button></td>
-                    <td><button class="button">5</button></td>
-                    <td><button class="button">6</button></td>
+                    <td><button class="button" onclick="set_text('4')">4</button></td>
+                    <td><button class="button" onclick="set_text('5')">5</button></td>
+                    <td><button class="button" onclick="set_text('6')">6</button></td>
                 </tr>
                 <tr>
-                    <td><button class="button">7</button></td>
-                    <td><button class="button">8</button></td>
-                    <td><button class="button">9</button></td>
+                    <td><button class="button" onclick="set_text('7')">7</button></td>
+                    <td><button class="button" onclick="set_text('8')">8</button></td>
+                    <td><button class="button" onclick="set_text('9')">9</button></td>
                 </tr>
                 <tr>
                     <td></td>
-                    <td><button class="button">0</button></td>
-                    <td></td>
+                    <td><button class="button" onclick="set_text('0')">0</button></td>
+                    <td><button class="button" onclick="">=</button></td>
                 </tr>
             </table>
             <table class="operations keyboard_style" >
                 <tr>
-                    <td><button class="button">/</button></td>
+                    <td><button class="button" onclick="set_text('/')">/</button></td>
                 </tr>
                 <tr>
-                    <td><button class="button">*</button></td>
+                    <td><button class="button" onclick="set_text('*')">*</button></td>
                 </tr>
                 <tr>
-                    <td><button class="button">-</button></td>
+                    <td><button class="button" onclick="set_text('-')">-</button></td>
                 </tr>
                 <tr>
-                    <td><button class="button">+</button></td>
+                    <td><button class="button" onclick="set_text('+')">+</button></td>
                 </tr>
             </table>
         </div>
     </div>
-    
-    
 </body>
-<script src="script.js"></script>
+<script src="script.js" ></script>
 </html>

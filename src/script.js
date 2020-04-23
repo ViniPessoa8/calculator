@@ -1,3 +1,3 @@
-function write(txt) {
-    document.getElementsByClassName("output")[0].innerHTML = txt
+function set_text(txt) {
+    document.getElementById("txtOutput").value += txt;
 }
