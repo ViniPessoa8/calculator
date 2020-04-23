@@ -8,21 +8,22 @@ let ops = ['+', '-', '*', '/'];
 
 // Keyboard Listeners
 document.addEventListener('keyup', (e) => {
-    if (e.code == 'Numpad1') set_text('1');
-    if (e.code == 'Numpad2') set_text('2');
-    if (e.code == 'Numpad3') set_text('3');
-    if (e.code == 'Numpad4') set_text('4');
-    if (e.code == 'Numpad5') set_text('5');
-    if (e.code == 'Numpad6') set_text('6');
-    if (e.code == 'Numpad7') set_text('7');
-    if (e.code == 'Numpad8') set_text('8');
-    if (e.code == 'Numpad9') set_text('9');
-    if (e.code == 'Numpad0') set_text('0');
-    if (e.code == 'NumpadAdd') set_text('+');
-    if (e.code == 'NumpadSubtract') set_text('-');
-    if (e.code == 'NumpadMultiply') set_text('*');
-    if (e.code == 'NumpadDivide') set_text('/');
-    if (e.code == 'NumpadEnter') equals();
+    if (e.code === 'Numpad1') set_text('1');
+    if (e.code === 'Numpad2') set_text('2');
+    if (e.code === 'Numpad3') set_text('3');
+    if (e.code === 'Numpad4') set_text('4');
+    if (e.code === 'Numpad5') set_text('5');
+    if (e.code === 'Numpad6') set_text('6');
+    if (e.code === 'Numpad7') set_text('7');
+    if (e.code === 'Numpad8') set_text('8');
+    if (e.code === 'Numpad9') set_text('9');
+    if (e.code === 'Numpad0') set_text('0');
+    if (e.code === 'NumpadAdd') set_text('+');
+    if (e.code === 'NumpadSubtract') set_text('-');
+    if (e.code === 'NumpadMultiply') set_text('*');
+    if (e.code === 'NumpadDivide') set_text('/');
+    if (e.code === 'NumpadEnter') equals();
+    if (e.code === 'Backspace') erase();
     
 });
 
@@ -50,7 +51,7 @@ function set_text(txt) {
     process_text(txt);
 }
 
-function clean_text() {
+function clear_text() {
     output.value = '';
     result.value = '';
 }
@@ -63,7 +64,7 @@ function process_text(txt) {
 
     if (str2 != null){
         str = result.value + txt;
-        clean_text();
+        clear_text();
         output.value = str;
     } else if (str1 != null) {
         str = str1[0];
@@ -111,8 +112,16 @@ String.prototype.replaceAt=function(index, replacement) {
 function equals() {
     if (result.value !== ''){
         answer = result.value;
-        clean_text();
+        clear_text();
         output.value = answer;
         equals_triggered = true;
     }
+}
+
+function erase() {
+    str     = output.value;
+    new_str = str.substr(0, str.length-1);
+    clear_text();
+    output.value = new_str;
+    process_text('');
 }
