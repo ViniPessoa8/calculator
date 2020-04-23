@@ -1,7 +1,25 @@
+body {
+    padding-top: 15%;
+}
+
+.button {
+    height: 40px;
+    width: 40px;
+    background-color: lightgrey;
+    border: none;
+    color: black;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+}
+
 .calculator {
+    width: 172px;
     display: block;
-    margin-left: auto;
-    margin-right: auto;
+    margin: auto;
+    border: 4px solid grey;
 }
 
 .keyboard {
@@ -10,22 +28,19 @@
 }
 
 .keyboard_style {
-    border: 4px solid grey;
     text-align: center;
     background-color: darkgray;
 }
 
 .keyboard_style td {
-    border: 1px solid black;
     width: 40px;
     height: 40px;
+    padding: 0;
 }
 
 .output {
-    width: 192px;
-    height: 40px;
-    background-color: darkgray;
-    border: 4px solid grey;
+    background-color: lightgray;
+    border: 2px solid darkgray;
 }
 
 .numpad {
@@ -35,4 +50,9 @@
 .operations {
     border-left: 0px;
     border-top: 0px;
+}
+
+.txtOutput {
+    margin: 0;
+    height:40px;
 }
