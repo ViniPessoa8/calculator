@@ -7,11 +7,9 @@ output.addEventListener('keyup', process_text);
 function set_text(txt) {
     if (ops.indexOf(txt) >= 0){ // Operation
         let last_char = output.value.charAt(output.value.length-1);
-        console.log(last_char, txt);
 
         if (ops.indexOf(last_char) >= 0) { // Replace
             if (last_char !== txt){
-                console.log('replace', last_char, txt);
                 output.value = output.value.replaceAt(output.value.length-1, txt);
             }
         }  else {
@@ -56,8 +54,6 @@ function calculate(txt) {
 
     op = op[op.length-1];
 
-    console.log(num1 + " " + op[0] + " " + num2);
-
     switch(op[0]){
         case '+':
             output = parseInt(num1) + parseInt(num2);
@@ -76,7 +72,6 @@ function calculate(txt) {
             break;
     }
 
-    console.log(output);
     return output;
 }
 
