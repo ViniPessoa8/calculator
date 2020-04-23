@@ -1,6 +1,7 @@
 // Variables
 let output  = document.getElementById('txtOutput');
 let result  = document.getElementById('txtResult');
+let equals_triggered = false;
 let ops = ['+', '-', '*', '/'];
 
 // output.addEventListener('keyup', process_text);
@@ -28,6 +29,7 @@ document.addEventListener('keyup', (e) => {
 // Functions
 function set_text(txt) {
     if (ops.indexOf(txt) >= 0){ // Operation
+            equals_triggered = false;
         let last_char = output.value.charAt(output.value.length-1);
 
         if (ops.indexOf(last_char) >= 0) { // Replace
@@ -38,7 +40,12 @@ function set_text(txt) {
             output.value += txt;
         }
     } else {
-        output.value += txt;
+        if (equals_triggered) {
+            output.value = txt;     
+            equals_triggered = false;   
+        } else {
+            output.value += txt;
+        }
     }
     process_text(txt);
 }
@@ -76,7 +83,7 @@ function calculate(txt) {
 
     op = op[op.length-1];
 
-    switch(op[0]){
+    switch(op){
         case '+':
             output = parseInt(num1) + parseInt(num2);
             break;
@@ -106,5 +113,6 @@ function equals() {
         answer = result.value;
         clean_text();
         output.value = answer;
+        equals_triggered = true;
     }
 }
