@@ -11,7 +11,6 @@ function clean_text() {
 }
 
 function process_text() {  
-    console.log("teste");
     txt     = output.value;
     pattern = /(\d+[\+\-\*\/]\d+)/;
     str     = txt.match(pattern);
