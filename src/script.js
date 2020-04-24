@@ -28,7 +28,7 @@ document.addEventListener('keyup', (e) => {
 // Functions
 function set_text(txt) {
     if (ops.indexOf(txt) >= 0){ // Operation
-            equals_triggered = false;
+        equals_triggered = false;
         let last_char = output.value.charAt(output.value.length-1);
 
         if (ops.indexOf(last_char) >= 0) { // Replace
