@@ -60,9 +60,12 @@ function clear_text(txt_out='' , txt_res='') {
 }
 
 function process_text(txt) {
+    // Pattern: [num][operator][num]
     let pattern1  = /([-]?\d+[\+\-\*\/]\d+)/;
-    let pattern2  = /([-]?\d+[\+\-\*\/]\d+[\+\-\*\/])/;
     let str1      = output.value.match(pattern1);
+
+    // Pattern: [num][operator][num][operator]
+    let pattern2  = /([-]?\d+[\+\-\*\/]\d+[\+\-\*\/])/;
     let str2      = output.value.match(pattern2);
 
     if (str2 != null){
@@ -71,14 +74,14 @@ function process_text(txt) {
         output.value = str;
     } else if (str1 != null) {
         str = str1[0];
-        console.log('calculate(' + str + ')');
-        result.value = calculate(str);
+        console.log('process_operation(' + str + ')');
+        result.value = process_operation(str);
     } 
 } 
 
-function calculate(txt) {
+function process_operation(txt) {
     let result;
-    let num_pat1 = /[-]?\d+/; // Number + signal
+    let num_pat1 = /[-]?\d+/; // Signal + Number
     let num_pat2 = /\d+/g; // Number
     let op_pat   = /[\+\-\*\/]/g; // Operator
 
@@ -88,7 +91,7 @@ function calculate(txt) {
     let op       = txt.match(op_pat);
     
     op = op[op.length-1]; // Gets last operator of the string (left to right)
-    result = operate(num1, num2, op); // Calculates the result
+    result = calculate(num1, num2, op); // Calculates the result
 
     return result;
 }
@@ -97,6 +100,7 @@ String.prototype.replaceAt = function(index, replacement) {
     return this.substr(0, index) + replacement + this.substr(index + replacement.length);
 }
 
+// Moves the 'Result' container value to the 'Output' container 
 function equals() {
     if (result.value !== ''){
         answer = result.value;
@@ -105,6 +109,7 @@ function equals() {
     }
 }
 
+// Erases last character of the 'Output' container
 function erase() {
     str     = output.value;
     new_str = str.substr(0, str.length-1);
@@ -113,6 +118,7 @@ function erase() {
     process_text('');
 }
 
+// Fills the 'Output' container blank with '0'
 function fill_0(){
     if (output.value === ''){
         output.value = '0';
@@ -120,6 +126,7 @@ function fill_0(){
     }
 }
 
+// Checks if 'txt' is an operation: + - * /
 function is_operation(txt) {
     if (ops.indexOf(txt) >= 0) {
         return true;
@@ -127,7 +134,7 @@ function is_operation(txt) {
     return false;
 }
 
-function operate(num1, num2, op) {
+function calculate(num1, num2, op) {
     let output;
 
     switch(op){
