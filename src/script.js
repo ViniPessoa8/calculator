@@ -6,52 +6,56 @@ let ops = ['+', '-', '*', '/'];
 
 // Keyboard Listeners
 document.addEventListener('keyup', (e) => {
-    if (e.code === 'Numpad1') set_text('1');
-    if (e.code === 'Numpad2') set_text('2');
-    if (e.code === 'Numpad3') set_text('3');
-    if (e.code === 'Numpad4') set_text('4');
-    if (e.code === 'Numpad5') set_text('5');
-    if (e.code === 'Numpad6') set_text('6');
-    if (e.code === 'Numpad7') set_text('7');
-    if (e.code === 'Numpad8') set_text('8');
-    if (e.code === 'Numpad9') set_text('9');
-    if (e.code === 'Numpad0') set_text('0');
-    if (e.code === 'NumpadAdd') set_text('+');
-    if (e.code === 'NumpadSubtract') set_text('-');
-    if (e.code === 'NumpadMultiply') set_text('*');
-    if (e.code === 'NumpadDivide') set_text('/');
+    if (e.code === 'Numpad1') type('1');
+    if (e.code === 'Numpad2') type('2');
+    if (e.code === 'Numpad3') type('3');
+    if (e.code === 'Numpad4') type('4');
+    if (e.code === 'Numpad5') type('5');
+    if (e.code === 'Numpad6') type('6');
+    if (e.code === 'Numpad7') type('7');
+    if (e.code === 'Numpad8') type('8');
+    if (e.code === 'Numpad9') type('9');
+    if (e.code === 'Numpad0') type('0');
+    if (e.code === 'NumpadAdd') type('+');
+    if (e.code === 'NumpadSubtract') type('-');
+    if (e.code === 'NumpadMultiply') type('*');
+    if (e.code === 'NumpadDivide') type('/');
     if (e.code === 'NumpadEnter') equals();
     if (e.code === 'Backspace') erase();
     
 });
 
 // Functions
+
 function set_text(txt) {
-    if (ops.indexOf(txt) >= 0){ // Operation
+    // Operation
+    if (is_operation(txt)){ 
         equals_triggered = false;
         let last_char = output.value.charAt(output.value.length-1);
 
-        if (ops.indexOf(last_char) >= 0) { // Replace
+        if (is_operation(last_char)) { // Replace
             if (last_char !== txt){
                 output.value = output.value.replaceAt(output.value.length-1, txt);
             }
-        } else {
+        } else { // Append
             output.value += txt;
         }
+    // Number
     } else {
-        if (equals_triggered) {
+        if (equals_triggered) { // Replace
             output.value = txt;     
             equals_triggered = false;   
-        } else {
+        } else { // Append
             output.value += txt;
         }
     }
+
     process_text(txt);
 }
 
-function clear_text() {
-    output.value = '';
-    result.value = '';
+function clear_text(txt_out='' , txt_res='') {
+    output.value = txt_out;
+    result.value = txt_res;
     fill_0();
 }
 
@@ -73,15 +77,58 @@ function process_text(txt) {
 } 
 
 function calculate(txt) {
-    let num_pat1 = /[-]?\d+/;
-    let num_pat2 = /\d+/g;
-    let op_pat   = /[\+\-\*\/]/g;
+    let result;
+    let num_pat1 = /[-]?\d+/; // Number + signal
+    let num_pat2 = /\d+/g; // Number
+    let op_pat   = /[\+\-\*\/]/g; // Operator
+
+    // RegEx matching
     let num1     = txt.match(num_pat1);
     let num2     = txt.match(num_pat2)[1];
     let op       = txt.match(op_pat);
-    let output;
+    
+    op = op[op.length-1]; // Gets last operator of the string (left to right)
+    result = operate(num1, num2, op); // Calculates the result
 
-    op = op[op.length-1];
+    return result;
+}
+
+String.prototype.replaceAt = function(index, replacement) {
+    return this.substr(0, index) + replacement + this.substr(index + replacement.length);
+}
+
+function equals() {
+    if (result.value !== ''){
+        answer = result.value;
+        clear_text(answer);
+        equals_triggered = true;
+    }
+}
+
+function erase() {
+    str     = output.value;
+    new_str = str.substr(0, str.length-1);
+
+    clear_text(new_str);
+    process_text('');
+}
+
+function fill_0(){
+    if (output.value === ''){
+        output.value = '0';
+        equals_triggered = true;
+    }
+}
+
+function is_operation(txt) {
+    if (ops.indexOf(txt) >= 0) {
+        return true;
+    } 
+    return false;
+}
+
+function operate(num1, num2, op) {
+    let output;
 
     switch(op){
         case '+':
@@ -104,31 +151,3 @@ function calculate(txt) {
     return output;
 }
 
-String.prototype.replaceAt=function(index, replacement) {
-    return this.substr(0, index) + replacement + this.substr(index + replacement.length);
-}
-
-function equals() {
-    if (result.value !== ''){
-        answer = result.value;
-        clear_text();
-        output.value = answer;
-        equals_triggered = true;
-    }
-}
-
-function erase() {
-    str     = output.value;
-    new_str = str.substr(0, str.length-1);
-    clear_text();
-    output.value = new_str;
-    process_text('');
-    fill_0();
-}
-
-function fill_0(){
-    if (output.value === ''){
-        output.value = '0';
-        equals_triggered = true;
-    }
-}
