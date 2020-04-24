@@ -27,7 +27,7 @@ document.addEventListener('keyup', (e) => {
 
 // Functions
 
-function set_text(txt) {
+function type(txt) {
     // Operation
     if (is_operation(txt)){ 
         equals_triggered = false;
