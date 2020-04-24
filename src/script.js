@@ -6,20 +6,20 @@ let ops = ['+', '-', '*', '/'];
 
 // Keyboard Listeners
 document.addEventListener('keyup', (e) => {
-    if (e.code === 'Numpad1') type('1');
-    if (e.code === 'Numpad2') type('2');
-    if (e.code === 'Numpad3') type('3');
-    if (e.code === 'Numpad4') type('4');
-    if (e.code === 'Numpad5') type('5');
-    if (e.code === 'Numpad6') type('6');
-    if (e.code === 'Numpad7') type('7');
-    if (e.code === 'Numpad8') type('8');
-    if (e.code === 'Numpad9') type('9');
-    if (e.code === 'Numpad0') type('0');
-    if (e.code === 'NumpadAdd') type('+');
-    if (e.code === 'NumpadSubtract') type('-');
-    if (e.code === 'NumpadMultiply') type('*');
-    if (e.code === 'NumpadDivide') type('/');
+    if (e.code === 'Numpad1') handle_write('1');
+    if (e.code === 'Numpad2') handle_write('2');
+    if (e.code === 'Numpad3') handle_write('3');
+    if (e.code === 'Numpad4') handle_write('4');
+    if (e.code === 'Numpad5') handle_write('5');
+    if (e.code === 'Numpad6') handle_write('6');
+    if (e.code === 'Numpad7') handle_write('7');
+    if (e.code === 'Numpad8') handle_write('8');
+    if (e.code === 'Numpad9') handle_write('9');
+    if (e.code === 'Numpad0') handle_write('0');
+    if (e.code === 'NumpadAdd') handle_write('+');
+    if (e.code === 'NumpadSubtract') handle_write('-');
+    if (e.code === 'NumpadMultiply') handle_write('*');
+    if (e.code === 'NumpadDivide') handle_write('/');
     if (e.code === 'NumpadEnter') equals();
     if (e.code === 'Backspace') erase();
     
@@ -27,7 +27,7 @@ document.addEventListener('keyup', (e) => {
 
 // Functions
 // Handles the writing of 'txt' on the 'Output' container
-function type(txt) {
+function handle_write(txt) {
     // Operation
     if (is_operation(txt)){ 
         equals_triggered = false;
