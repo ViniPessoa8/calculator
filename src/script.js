@@ -52,6 +52,7 @@ function set_text(txt) {
 function clear_text() {
     output.value = '';
     result.value = '';
+    fill_0();
 }
 
 function process_text(txt) {
