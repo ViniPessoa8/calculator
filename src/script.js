@@ -22,38 +22,40 @@ document.addEventListener('keyup', (e) => {
         case 'NumpadMultiply': handle_write('*'); break;
         case 'NumpadDivide': handle_write('/'); break;
         case 'NumpadEnter': equals(); break;
-        case 'Backspace': erase(); break;
+        case 'Backspace': equals_triggered?clear_text():erase(); break;
         default: break;
     }
     
 });
 
 // Functions
-// Handles the writing of 'txt' on the 'Output' container
-function handle_write(txt) {
+// Handles the writing of 'input' on the 'Output' container
+function handle_write(input) {
+    let position = output.value.length-1;
+    let last_char = output.value.charAt(position);
+
     // Operation
-    if (is_operation(txt)){ 
+    if (is_operation(input)){ 
         equals_triggered = false;
-        let last_char = output.value.charAt(output.value.length-1);
 
         if (is_operation(last_char)) { // Replace
-            if (last_char !== txt){
-                output.value = output.value.replaceAt(output.value.length-1, txt);
+            if (last_char !== input){
+                output.value = output.value.replaceAt(output.value.length-1, input);
             }
         } else { // Append
-            output.value += txt;
+            output.value += input;
         }
     // Number
     } else {
-        if (equals_triggered) { // Replace
-            output.value = txt;     
-            equals_triggered = false;   
-        } else { // Append
-            output.value += txt;
+        if (equals_triggered){
+            output.value = input;
+            if (input !== '0') equals_triggered = false;
+        } else {
+            output.value += input;
         }
     }
 
-    process_text(txt);
+    process_text(input);
 }
 
 // Clears the 'Result' container and sets 'Output' container to 0
@@ -64,8 +66,8 @@ function clear_text(txt_out='' , txt_res='') {
 }
 
 // Handles the 'Output' text
-// 'txt' is the argument from 'handle_write(txt)'
-function process_text(txt) {
+// 'input' is the argument from 'handle_write(input)'
+function process_text(input) {
     // Pattern: [num][operator][num]
     let pattern1  = /([-]?\d+[\+\-\*\/]\d+)/;
     let str1      = output.value.match(pattern1);
@@ -75,7 +77,7 @@ function process_text(txt) {
     let str2      = output.value.match(pattern2);
 
     if (str2 != null){
-        str = result.value + txt;
+        str = result.value + input;
         clear_text();
         output.value = str;
     } else if (str1 != null) {
@@ -85,16 +87,16 @@ function process_text(txt) {
     } 
 } 
 
-function process_operation(txt) {
+function process_operation(input) {
     let result;
     let num_pat1 = /[-]?\d+/; // Signal + Number
     let num_pat2 = /\d+/g; // Number
     let op_pat   = /[\+\-\*\/]/g; // Operator
 
     // RegEx matching
-    let num1     = txt.match(num_pat1);
-    let num2     = txt.match(num_pat2)[1];
-    let op       = txt.match(op_pat);
+    let num1     = input.match(num_pat1);
+    let num2     = input.match(num_pat2)[1];
+    let op       = input.match(op_pat);
     
     op = op[op.length-1]; // Gets last operator of the string (left to right)
     result = calculate(num1, num2, op); // Calculates the result
@@ -133,9 +135,9 @@ function fill_0(){
     }
 }
 
-// Checks if 'txt' is an operation: + - * /
-function is_operation(txt) {
-    return ops.indexOf(txt) >= 0;
+// Checks if 'input' is an operation: + - * /
+function is_operation(input) {
+    return ops.indexOf(input) >= 0;
 }
 
 function calculate(num1, num2, op) {
