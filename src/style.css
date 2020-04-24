@@ -73,7 +73,6 @@ body {
 .result {
     display: flex;
     align-items: flex-end;
-    with: 100%;
 }
 
 .txtResult {
