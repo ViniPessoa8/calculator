@@ -26,7 +26,7 @@ document.addEventListener('keyup', (e) => {
 });
 
 // Functions
-
+// Handles the writing of 'txt' on the 'Output' container
 function type(txt) {
     // Operation
     if (is_operation(txt)){ 
@@ -53,12 +53,14 @@ function type(txt) {
     process_text(txt);
 }
 
+// Clears the 'Result' container and sets 'Output' container to 0
 function clear_text(txt_out='' , txt_res='') {
     output.value = txt_out;
     result.value = txt_res;
     fill_0();
 }
 
+// Handles the different 
 function process_text(txt) {
     // Pattern: [num][operator][num]
     let pattern1  = /([-]?\d+[\+\-\*\/]\d+)/;
@@ -96,6 +98,7 @@ function process_operation(txt) {
     return result;
 }
 
+// Replaces a character from a string in a certain position
 String.prototype.replaceAt = function(index, replacement) {
     return this.substr(0, index) + replacement + this.substr(index + replacement.length);
 }
