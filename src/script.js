@@ -6,22 +6,25 @@ let ops = ['+', '-', '*', '/'];
 
 // Keyboard Listeners
 document.addEventListener('keyup', (e) => {
-    if (e.code === 'Numpad1') handle_write('1');
-    if (e.code === 'Numpad2') handle_write('2');
-    if (e.code === 'Numpad3') handle_write('3');
-    if (e.code === 'Numpad4') handle_write('4');
-    if (e.code === 'Numpad5') handle_write('5');
-    if (e.code === 'Numpad6') handle_write('6');
-    if (e.code === 'Numpad7') handle_write('7');
-    if (e.code === 'Numpad8') handle_write('8');
-    if (e.code === 'Numpad9') handle_write('9');
-    if (e.code === 'Numpad0') handle_write('0');
-    if (e.code === 'NumpadAdd') handle_write('+');
-    if (e.code === 'NumpadSubtract') handle_write('-');
-    if (e.code === 'NumpadMultiply') handle_write('*');
-    if (e.code === 'NumpadDivide') handle_write('/');
-    if (e.code === 'NumpadEnter') equals();
-    if (e.code === 'Backspace') erase();
+    switch(e.code) {
+        case 'Numpad1': handle_write('1'); break;
+        case 'Numpad2': handle_write('2'); break;
+        case 'Numpad3': handle_write('3'); break;
+        case 'Numpad4': handle_write('4'); break;
+        case 'Numpad5': handle_write('5'); break;
+        case 'Numpad6': handle_write('6'); break;
+        case 'Numpad7': handle_write('7'); break;
+        case 'Numpad8': handle_write('8'); break;
+        case 'Numpad9': handle_write('9'); break;
+        case 'Numpad0': handle_write('0'); break;
+        case 'NumpadAdd': handle_write('+'); break;
+        case 'NumpadSubtract': handle_write('-'); break;
+        case 'NumpadMultiply': handle_write('*'); break;
+        case 'NumpadDivide': handle_write('/'); break;
+        case 'NumpadEnter': equals(); break;
+        case 'Backspace': erase(); break;
+        default: break;
+    }
     
 });
 
@@ -60,7 +63,8 @@ function clear_text(txt_out='' , txt_res='') {
     fill_0();
 }
 
-// Handles the different 
+// Handles the 'Output' text
+// 'txt' is the argument from 'handle_write(txt)'
 function process_text(txt) {
     // Pattern: [num][operator][num]
     let pattern1  = /([-]?\d+[\+\-\*\/]\d+)/;
@@ -131,10 +135,7 @@ function fill_0(){
 
 // Checks if 'txt' is an operation: + - * /
 function is_operation(txt) {
-    if (ops.indexOf(txt) >= 0) {
-        return true;
-    } 
-    return false;
+    return ops.indexOf(txt) >= 0;
 }
 
 function calculate(num1, num2, op) {
