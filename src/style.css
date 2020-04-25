@@ -28,6 +28,7 @@ body {
     cursor: pointer;
     margin: 1px;
     border-radius: 10px;
+    outline: none;
 }
 
 .calculator {
