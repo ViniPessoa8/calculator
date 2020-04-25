@@ -4,6 +4,13 @@
     --color-3: darkgrey; /*#2D4571;*/
 }
 
+/*** KEYFRAMES ***/
+@keyframes button-animation {
+    from {border: 0px solid var(--color-2);}
+    to {border: 2px solid var(--color-2);}
+}
+
+/*** STYLE ***/
 body {
     margin-top: 5%;
 }
@@ -29,6 +36,13 @@ body {
     margin: 1px;
     border-radius: 10px;
     outline: none;
+}
+
+.button:hover {
+    animation-timing-function: ease-out;
+    animation-name: button-animation;
+    animation-duration: 0.1s;
+    border: 2px solid var(--color-2);
 }
 
 .calculator {
