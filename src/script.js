@@ -34,28 +34,31 @@ function handle_write(input) {
     let position = output.value.length-1;
     let last_char = output.value.charAt(position);
 
-    // Operation
-    if (is_operation(input)){ 
-        equals_triggered = false;
+    
+    if (output.value.length < 14) { 
+        // Operation
+        if (is_operation(input)){ 
+            equals_triggered = false;
 
-        if (is_operation(last_char)) { // Replace
-            if (last_char !== input){
-                output.value = output.value.replaceAt(output.value.length-1, input);
+            if (is_operation(last_char)) { // Replace
+                if (last_char !== input){
+                    output.value = output.value.replaceAt(output.value.length-1, input);
+                }
+            } else { // Append
+                output.value += input;
             }
-        } else { // Append
-            output.value += input;
-        }
-    // Number
-    } else {
-        if (equals_triggered){
-            output.value = input;
-            if (input !== '0') equals_triggered = false;
+        // Number
         } else {
-            output.value += input;
+            if (equals_triggered){
+                output.value = input;
+                if (input !== '0') equals_triggered = false;
+            } else {
+                output.value += input;
+            }
         }
+        console.log(output.value.length);
+        process_text(input);
     }
-
-    process_text(input);
 }
 
 // Clears the 'Result' container and sets 'Output' container to 0
