@@ -56,7 +56,6 @@ function handle_write(input) {
                 output.value += input;
             }
         }
-        console.log(output.value.length);
         process_text(input);
     }
 }
@@ -85,7 +84,6 @@ function process_text(input) {
         output.value = str;
     } else if (str1 != null) {
         str = str1[0];
-        console.log('process_operation(' + str + ')');
         result.value = process_operation(str);
     } 
 } 
